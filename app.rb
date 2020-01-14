@@ -2,9 +2,10 @@ require 'sinatra/base'
 require './lib/user'
 
 class BookmarkManager < Sinatra::Base
+  ENV['current_environment'] = 'bookmark_manager' if app_file == $0
+  
   get '/' do
     @bookmarks = User.bookmarks
-    p @bookmarks
     erb :index
   end
 

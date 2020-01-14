@@ -16,6 +16,8 @@
 
 # Set the environment to "test"
 ENV['RACK_ENV'] = 'test'
+ENV['current_environment'] = 'bookmark_manager_test'
+
 
 # Bring in the contents of the `app.rb` file. The below is equivalent to: require_relative '../app.rb'
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
@@ -25,6 +27,9 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
 
+#require web helper
+require 'web_helpers'
+
 # Tell Capybara to talk to BookmarkManager
 Capybara.app = BookmarkManager
 
@@ -32,6 +37,10 @@ RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
+  config.before(:each) do
+    reset_table
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
@@ -113,3 +122,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+# ENV['current_environment'] = 'bookmark_manager'
