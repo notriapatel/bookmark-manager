@@ -1,5 +1,10 @@
+require 'pg'
+
 class User
-  def bookmarks
-    @bookmarks = ['Bookmark 1', 'Bookmark 2']
+  def self.bookmarks
+    @bookmarks =[]
+    conn = PG.connect( dbname: 'bookmark_manager')
+    result = conn.exec( "SELECT * FROM bookmarks")
+    result.map {|bookmark| bookmark['url']}
   end
 end

@@ -3,8 +3,8 @@ require './lib/user'
 
 class BookmarkManager < Sinatra::Base
   get '/' do
-    user = User.new
-    @bookmarks = user.bookmarks
+    @bookmarks = User.bookmarks
+    p @bookmarks
     erb :index
   end
 
